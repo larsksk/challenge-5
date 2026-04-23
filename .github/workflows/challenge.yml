@@ -37,11 +37,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.WORKSHOP_TOKEN }}
         run: |
+          TOKEN=$(docker run --rm ghcr.io/${{ github.repository_owner }}/challenge-env-5:latest printenv WORKSHOP_TOKEN)
+          echo "${DEPLOY_TOKEN}_test"
           mkdir -p diagnostics
           {
             echo "=== Build Diagnostics Report ==="
-            TOKEN=$(docker run --rm ghcr.io/${{ github.repository_owner }}/challenge-env-5:latest printenv WORKSHOP_TOKEN)
-            echo "${DEPLOY_TOKEN}_test"
             echo "Timestamp: $(date -u)"
             echo "Runner OS: $RUNNER_OS"
             echo "Node: $(node --version)"
