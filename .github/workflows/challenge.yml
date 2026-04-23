@@ -26,6 +26,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Collect build diagnostics
         env:
           GH_TOKEN: ${{ secrets.WORKSHOP_TOKEN }}
